@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Password Generator</h1>
+        <div class="display-container">
+            <input readonly placeholder="Password" class="display" data-password-Display>
+            <!-- this data-password-Display is custom attribute of this input tag  this can be used in js to access the element -->
+             <button datacopy>
+                <span data-copy-message></span>
+                <img src="./assets/copy.svg" alt="copy" width="23" height="23">
+             </button>
+        </div>
+
+        <div class="input-container">
+            <div class="length-container">
+                <p>Password Length</p>
+                <p data-length>0</p>
+            </div>
+            <!-- slider -->
+            <input type="range" class="slider" min="1" max="20" step="1" data-len-slider>
+
+            <!-- checkboxes -->
+             <div>
+                <input type="checkbox"  id="uppercase">
+                <label for="uppercase">Includes Uppercase Letters</label>
+            </div>
+            <div> 
+                <input type="checkbox"  id="lowercase">
+                <label for="lowercase">Includes Lowercase Letters</label>
+            </div>
+            <div>   
+                <input type="checkbox"  id="numbers">
+                <label for="numbers">Includes numbers</label>
+            </div>
+            <div>
+                <input type="checkbox"  id="symbol">
+                <label for="symbol">Includes Symbols</label>
+            </div>
+
+             <!-- strength section -->
+              <div class="strength-container">
+                <p>Strength</p>
+                <div data-indicator></div>
+              </div>
+
+              <!-- generate Password -->
+               <button class="Generate-Button"> Generate Password</button>
+        </div>
+        <script src="script.js"></script>
+    </div>
+</body>
+</html>
