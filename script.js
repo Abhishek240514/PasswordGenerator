@@ -16,7 +16,7 @@ const sym = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/'
 
 let password ="";
 let passwordLen = 10; 
-let checkcount = 1;
+let checkcount = 0;
 handleSlider();
 //set circlr colour to grey in start
 
@@ -108,6 +108,72 @@ inputSlider.addEventListener('input', (e)=>{
 copybutton.addEventListener('click', ()=>{
     if(datapassworddisplay.value) copyContent();
 })
-generateButton.addEventListener('click', ()=>{
 
+function shufflePass(array){
+    // fisher yates method
+    for(let i = array.length ; i>0 ; i--){
+        const j = Math.floor(Math.random()*(i+1));
+        const temp = array[i];
+        array[i] =array[j];
+        array[j] = temp;
+    }
+}
+
+generateButton.addEventListener('click', ()=>{
+    //if none of the checkbox is selected 
+    if (checkcount<=0) return;
+    if(passwordLen<checkcount){
+        passwordLen = checkcount;
+        handleSlider();
+    }
+
+    //to find new password
+    
+    //remove old password
+    password="";
+    //lets put the stuff mentioned by the checkbox
+
+    // if(uppercaseCheck.checked){
+    //     password +=GetUppercase();
+    // }
+    // if(lowercaseCheck.checked){
+    //     password +=GetLowercase();
+    // }
+    // if(numberCheck.checked){
+    //     password +=GetRandomNum();
+    // }
+    // if(symbolCheck.checked){
+    //     password +=GenerateSymbol();
+    // }
+    let funarr =[];
+    if (uppercaseCheck.checked){
+        funarr.push(GetUppercase);
+    }
+    if(lowercaseCheck.checked){
+        funarr.push(GetLowercase);
+    }
+    if(numberCheck.checked){
+        funarr.push(GetRandomNum);
+    }
+    if(symbolCheck.checked){
+        funarr.push(GenerateSymbol);
+    }
+
+    //compulsory Addition
+    for(let i = 0 ; i < funarr.length ; i++){  
+        password += funarr[i]();
+    }
+    //remaining addition
+    for(let i = 0 ; i < passwordLen - funarr.length ; i++){
+        let randIndex = GetRandomNum(0,funarr.length);
+        password += funarr[randIndex]();
+    }
+    //shuffle the password
+    password = shufflePass(Array.from(password));
+
+    //show in ui
+    datapassworddisplay.value = password;
+
+    //calculate strength 
+    calcStrength();
 })
