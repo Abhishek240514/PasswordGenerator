@@ -24,6 +24,9 @@ setIndicator("#ccc"); // start indicator as grey
 function handleSlider() {
     inputSlider.value = passwordLen;
     lengthdisplay.innerText = passwordLen;
+    const min = inputSlider.min;
+    const max = inputSlider.max;
+    inputSlider.style.backgroundSize = ((passwordLen -min)*100/(max - min)) + "% 100%"; //this give the width of the background of the slider and the other one is for height
 }
 
 function setIndicator(color) {
